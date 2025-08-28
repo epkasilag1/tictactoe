@@ -22,7 +22,7 @@ function Player({name, playerScore}) {
     <div className='text-center text-sm md:text-2xl font-semibold w-16 md:w-32'>
       <h1 className= {`text-bold text-5xl ${name ? "text-red-500" : "text-green-700"}`}>{name ? "X" : "O"}</h1>
       <h1>{player}</h1>
-      <h2 className="text-2xl md:text-3xl mt-2">{name ? playerScore[0] : playerScore[1]}</h2>
+      <h2 className="text-2xl md:text-3xl mt-2 w-16 border border-black mx-auto bg-white rounded-md">{name ? playerScore[0] : playerScore[1]}</h2>
     </div>
   )
 }
@@ -52,7 +52,7 @@ function Board({name}) {
 
   return (
     <div className='flex flex-col items-center'>
-      <h1 className="text-3xl mb-2"><span className='font-semibold'>{turn ? name : "Computer"}</span>'s turn</h1>
+      <h1 className="text-2xl md:text-3xl mb-2"><span className='font-semibold'>{turn ? name : "Computer"}</span>'s turn</h1>
       <div className='flex items-center p-1 md:p-2 bg-white/70 mx-4 rounded-lg border'>
         <div className="grid grid-cols-3 gap-1 md:gap-2">
           {
