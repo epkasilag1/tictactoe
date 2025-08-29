@@ -1,0 +1,9 @@
+header img {
+    width: 12rem;
+    margin: auto;
+    padding: 12px 0px;
+}
+
+.playButton {
+    text-shadow: '2px 2px 0 #000'
+}
