@@ -75,13 +75,23 @@ function Board({names, setScore}) {
 
   const checkStatus = (cells) => {
     let isWin = 0
+    let nullCount = 0
     for (var i=0; i<winningConfigs.length; i++){
+      if (cells[i] === null) {
+        nullCount++;
+      }
+
       let x = winningConfigs[i][0]
       let y = winningConfigs[i][1]
       let z = winningConfigs[i][2]
       if (cells[x] == cells[y] && cells[y] == cells[z] && cells[x]){
         setWinner(turn ? 0 : 1);
         return true
+      }
+      // If no winner but no empty cells → draw
+      if (cells.filter(c => c === null).length === 0) {
+        setWinner(-1); // use -1 for draw
+        return true;
       }
     }
     return isWin
@@ -113,7 +123,7 @@ function Board({names, setScore}) {
 
     setShowResult(false)
   }
-  
+
   return (
     <div className='flex flex-col items-center'>
       <h1 className="text-2xl md:text-3xl mb-2"><span className='font-semibold'>{turn ? names[0] : names[1]}</span>'s turn</h1>
@@ -127,8 +137,9 @@ function Board({names, setScore}) {
         </div>
       </div>
       { showResult && 
-          (<div className="absolute inset-0 bg-amber-100 bg-opacity-50 flex flex-col items-center z-10 w-42 h-32 m-auto border-8 border-gray-600 rounded-lg">
-            <p className="text-black text-xl p-2 font-bold font-mono">Result</p>
+          (<div className="absolute inset-0 bg-amber-100 bg-opacity-50 flex flex-col items-center justify-center z-10 w-72 h-42 m-auto border-8 border-gray-600 rounded-lg">
+            <p className="text-black text-xl font-bold font-mono">Result</p>
+            <h2 className="font-bold text-2xl p-2">{winner == -1 ? 'Draw!' : `${names[winner]} wins!`}</h2>
             <button 
               className="playButton border border-black p-2 rounded-xl bg-green-400 text-white text-xl font-bold hover:bg-green-500 active:bg-green-700"
               onClick={() => reset()}>
