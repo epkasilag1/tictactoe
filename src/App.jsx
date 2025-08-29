@@ -21,7 +21,7 @@ function Header() {
   return (
     <>
       <header className="text-center py-2 bg-gray-800 mb-32 md:mb-24">
-        <img src="/images/ttt.gif" alt="tictactoe logo" />
+        <img src="images/ttt.gif" alt="tictactoe logo" />
       </header>
     </>
   )
