@@ -42,7 +42,7 @@ function Player({name, playerScore}) {
 function Board({names, setScore}) {
   const [cells, setCell] = useState(Array(9).fill(null))
   const [turn, setTurn] = useState(true)  
-  const [winner, setWinner] = useState(null);
+  const [winner, setWinner] = useState(-1);
   const [showResult, setShowResult] = useState(false);
   const winningConfigs = [
     [0, 1, 2],
@@ -75,11 +75,7 @@ function Board({names, setScore}) {
 
   const checkStatus = (cells) => {
     let isWin = 0
-    let nullCount = 0
     for (var i=0; i<winningConfigs.length; i++){
-      if (cells[i] === null) {
-        nullCount++;
-      }
 
       let x = winningConfigs[i][0]
       let y = winningConfigs[i][1]
@@ -88,12 +84,12 @@ function Board({names, setScore}) {
         setWinner(turn ? 0 : 1);
         return true
       }
-      // If no winner but no empty cells → draw
+    }
+    // If no winner but no empty cells → draw
       if (cells.filter(c => c === null).length === 0) {
         setWinner(-1); // use -1 for draw
         return true;
       }
-    }
     return isWin
   }
 
