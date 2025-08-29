@@ -127,13 +127,18 @@ function Board({names, setScore}) {
         <div className="grid grid-cols-3 gap-1 md:gap-2">
           {
             cells.map((num, index) => (
-              <button className={`border border-gray-500 bg-gray-300 text-3xl font-bold w-12 h-12 sm:w-16 sm:h-16 md:w-32 md:h-32 md:text-3xl rounded-lg hover:bg-gray-600 active:bg-gray-800 ${cells[index]=="X" ? "text-red-500" : "text-green-700"}`} key={index} onClick={() => updateCell(index)}>{num}</button>
+              <button 
+                className={`border border-gray-500 bg-gray-300 text-3xl font-bold w-12 h-12 sm:w-16 sm:h-16 md:w-32 md:h-32 md:text-3xl rounded-lg hover:bg-gray-600 active:bg-gray-800 ${cells[index]=="X" ? "text-red-500" : "text-green-700"}`} 
+                key={index} 
+                onClick={() => updateCell(index)}>
+                {num && <span className="slide-in-top">{num}</span>}
+              </button>
             ))
           }
         </div>
       </div>
       { showResult && 
-          (<div className="absolute inset-0 bg-amber-100 bg-opacity-50 flex flex-col items-center justify-center z-10 w-72 h-42 m-auto border-8 border-gray-600 rounded-lg">
+          (<div className="absolute inset-0 bg-amber-100 bg-opacity-50 flex flex-col items-center justify-center z-10 w-72 h-42 m-auto border-8 border-gray-600 rounded-lg animate-fadeInScale">
             <p className="text-black text-xl font-bold font-mono">Result</p>
             <h2 className="font-bold text-2xl p-2">{winner == -1 ? 'Draw!' : `${names[winner]} wins!`}</h2>
             <button 
